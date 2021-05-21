@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the training set
-dataset_train = pd.read_csv('SPY.csv')
+dataset_train = pd.read_csv('AAPL.csv')
 training_set = dataset_train.iloc[:, 1:2].values
 
 # Feature Scaling
@@ -72,11 +72,11 @@ regressor.fit(X_train, y_train, epochs = 10, batch_size = 32)                   
 
 # Part 3 - Making the predictions and visualising the results
 
-# Getting the real stock price of 2017
-dataset_test = pd.read_csv('SPY.csv')
+# Getting the real stock price
+dataset_test = pd.read_csv('AAPL.csv')
 real_stock_price = dataset_test.iloc[:, 1:2].values
 
-# Getting the predicted stock price of 2017
+# Getting the predicted stock price
 dataset_total = pd.concat((dataset_train['Close'], dataset_test['Close']), axis = 0)
 inputs = dataset_total[len(dataset_total) - len(dataset_test) - 1:].values          #
 inputs = inputs.reshape(-1,1)
@@ -90,10 +90,10 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
 # Visualising the results
-plt.plot(real_stock_price, color = 'red', label = 'Real SPY Stock Price')
-plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted SPY Stock Price')
-plt.title('SPY Stock Price Prediction')
+plt.plot(real_stock_price, color = 'red', label = 'Real AAPL Stock Price')
+plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted AAPL Stock Price')
+plt.title('AAPL Stock Price Prediction')
 plt.xlabel('Time')
-plt.ylabel('SPY Stock Price')
+plt.ylabel('AAPL Stock Price')
 plt.legend()
 plt.show()
